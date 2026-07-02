@@ -95,7 +95,8 @@ with tab_chat:
 
         # Call the agent with the image path
         try:
-            result = shopping_agent.invoke({"messages": lc_history, "image_path": tmp_path})
+            with st.spinner("Please wait... processing image and finding products..."):
+                result = shopping_agent.invoke({"messages": lc_history, "image_path": tmp_path})
             if isinstance(result, dict) and "messages" in result and hasattr(result["messages"][-1], "content"):
                 bot_reply = result["messages"][-1].content
             else:
@@ -132,7 +133,8 @@ with tab_chat:
 
         # Send to agent
         try:
-            result = shopping_agent.invoke({"messages": lc_history})
+            with st.spinner("Please wait... searching products..."):
+                result = shopping_agent.invoke({"messages": lc_history})
             if isinstance(result, dict) and "messages" in result and hasattr(result["messages"][-1], "content"):
                 bot_reply = result["messages"][-1].content
             else:
